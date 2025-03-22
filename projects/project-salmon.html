@@ -1,35 +1,171 @@
-<!-- project-coastal.html -->
-<section class="project-detail">
-    <div class="container">
-        <a href="index.html#projects" class="back-button">← Back to Projects</a>
-        
-        <h2>Coastal Ecosystem Shifts: Cable Bay</h2>
-        
-        <!-- Image Gallery -->
-        <div class="project-gallery">
-            <img src="images/coastal-change-map.jpg" alt="Land Cover Change Map 2018-2024">
-            <!-- Add more images as needed -->
-            <img src="images/qgis-polygons.jpg" alt="Classification Polygons">
-            <img src="models/random-forest-output.jpg" alt="Model Output">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salmon Stream Network Analysis</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo">Your Name</a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../index.html#skills">Skills</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="project-content">
-            <h3>Objective</h3>
-            <p>Monitor land cover changes using Sentinel-2 imagery to support conservation efforts.</p>
+    <!-- Project Detail Section -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="back-button">
+                <a href="../index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            </div>
+            
+            <h1>Salmon Stream Network Analysis</h1>
+            
+            <div class="project-metadata">
+                <span class="project-date">2023</span>
+                <div class="project-tags">
+                    <span class="tag">Spatial Analysis</span>
+                    <span class="tag">Stream Modeling</span>
+                    <span class="tag">Habitat Connectivity</span>
+                    <span class="tag">ArcGIS Pro</span>
+                    <span class="tag">GIS</span>
+                </div>
+            </div>
+            
+            <div class="project-content-wrapper">
+                <div class="project-image-gallery">
+                    <img src="../images/salmon_stream_network_map.jpg" alt="Salmon Stream Network Map" class="featured-image">
+                    <div class="image-grid">
+                        <img src="../images/terrain_riparian_map.jpg" alt="Terrain & Riparian Map">
+                        <img src="../images/salmon_watershed.jpg" alt="Salmon Watershed Analysis">
+                    </div>
+                </div>
+                
+                <div class="project-description">
+                    <h2>Objective</h2>
+                    <p>Model salmon habitat connectivity using GIS and Digital Elevation Models (DEMs) to identify barriers and support conservation planning strategies.</p>
+                    
+                    <h2>Methods</h2>
+                    <ul>
+                        <li>Derived stream networks from high-resolution DEMs in ArcGIS Pro</li>
+                        <li>Identified barriers to fish passage (dams, culverts, natural obstacles)</li>
+                        <li>Analyzed stream flow accumulation and watershed characteristics</li>
+                        <li>Evaluated stream order dynamics using terrain analysis</li>
+                        <li>Proposed methodology improvements including:
+                            <ul>
+                                <li>Higher-resolution DEMs for better stream delineation</li>
+                                <li>Lake masking for improved hydrological modeling</li>
+                                <li>Integration of field validation data</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h2>Outcomes</h2>
+                    <ul>
+                        <li>Successfully mapped the stream network across the study area</li>
+                        <li>Highlighted critical connectivity issues affecting salmon migration</li>
+                        <li>Recommended specific dam removal and culvert replacement locations</li>
+                        <li>Created comprehensive terrain analysis showing stream order dynamics</li>
+                        <li>Developed priority conservation zones based on habitat quality</li>
+                    </ul>
+                    
+                    <h2>Technical Highlights</h2>
+                    <div class="code-snippet">
+                        <pre><code class="language-python">
+# Example of ArcPy code for stream network derivation
+import arcpy
+from arcpy.sa import *
 
-            <h3>Methods</h3>
-            <ul>
-                <li>Processed annual cloud-free Sentinel-2 Level-2A composites</li>
-                <li>Applied Random Forest classification (100 trees, 255 polygons)</li>
-                <li>Conducted transition matrix and hotspot analysis</li>
-            </ul>
+# Set workspace and enable Spatial Analyst extension
+arcpy.env.workspace = "C:/GIS_Projects/Salmon_Analysis"
+arcpy.CheckOutExtension("Spatial")
 
-            <h3>Outcome</h3>
-            <ul>
-                <li>Achieved 97.0%-98.6% accuracy</li>
-                <li>Identified critical ecosystem changes</li>
-                <li>Supported UN SDG 15 and BC's Biodiversity Strategy</li>
-            </ul>
+# Fill sinks in the DEM
+dem = "watershed_dem.tif"
+filled_dem = Fill(dem)
+filled_dem.save("filled_dem.tif")
+
+# Calculate flow direction
+flow_dir = FlowDirection(filled_dem)
+flow_dir.save("flow_direction.tif")
+
+# Calculate flow accumulation
+flow_acc = FlowAccumulation(flow_dir)
+flow_acc.save("flow_accumulation.tif")
+
+# Extract streams (cells with accumulation > threshold)
+threshold = 1000  # Adjust based on watershed characteristics
+streams = Con(flow_acc > threshold, 1)
+streams.save("stream_network.tif")
+
+# Convert raster streams to vector features
+arcpy.sa.StreamToFeature(streams, flow_dir, "stream_network.shp", "SIMPLIFY")
+                        </code></pre>
+                    </div>
+                    
+                    <h2>Key Findings</h2>
+                    <p>This analysis revealed several important insights for salmon habitat conservation:</p>
+                    <ul>
+                        <li>Identified three major migration barriers requiring immediate attention</li>
+                        <li>Mapped critical spawning habitats in headwater streams</li>
+                        <li>Quantified the impact of watershed degradation on habitat connectivity</li>
+                        <li>Demonstrated the effectiveness of GIS-based stream network analysis for conservation planning</li>
+                    </ul>
+                    
+                    <h2>Significance</h2>
+                    <p>The project provides valuable information for salmon conservation efforts, integrating hydrological modeling with habitat assessment. The methodology can be applied to other watersheds to prioritize restoration efforts and improve habitat connectivity. The findings directly support local conservation initiatives and have been incorporated into regional salmon recovery plans.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+    
+    <!-- Related Projects Section -->
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Projects</h2>
+            <div class="related-grid">
+                <a href="cable_bay_project.html" class="related-card">
+                    <h3>Tracking Coastal Ecosystem Shifts</h3>
+                    <p>Monitoring land cover changes in Cable Bay, BC.</p>
+                </a>
+                <a href="project-grizzly.html" class="related-card">
+                    <h3>Grizzly Bear Movement in Alberta</h3>
+                    <p>Least cost path analysis for wildlife corridors.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="../js/script.js"></script>
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+</body>
+</html>

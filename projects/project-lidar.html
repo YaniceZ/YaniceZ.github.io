@@ -1,35 +1,184 @@
-<!-- project-coastal.html -->
-<section class="project-detail">
-    <div class="container">
-        <a href="index.html#projects" class="back-button">← Back to Projects</a>
-        
-        <h2>Coastal Ecosystem Shifts: Cable Bay</h2>
-        
-        <!-- Image Gallery -->
-        <div class="project-gallery">
-            <img src="images/coastal-change-map.jpg" alt="Land Cover Change Map 2018-2024">
-            <!-- Add more images as needed -->
-            <img src="images/qgis-polygons.jpg" alt="Classification Polygons">
-            <img src="models/random-forest-output.jpg" alt="Model Output">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LiDAR & Point Cloud Processing for Forestry</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo">Your Name</a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../index.html#skills">Skills</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="project-content">
-            <h3>Objective</h3>
-            <p>Monitor land cover changes using Sentinel-2 imagery to support conservation efforts.</p>
+    <!-- Project Detail Section -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="back-button">
+                <a href="../index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            </div>
+            
+            <h1>LiDAR & Point Cloud Processing for Forestry</h1>
+            
+            <div class="project-metadata">
+                <span class="project-date">2023-2024</span>
+                <div class="project-tags">
+                    <span class="tag">LiDAR</span>
+                    <span class="tag">3D Modeling</span>
+                    <span class="tag">Forest Inventory</span>
+                    <span class="tag">R</span>
+                    <span class="tag">lidR</span>
+                    <span class="tag">Predictive Analytics</span>
+                </div>
+            </div>
+            
+            <div class="project-content-wrapper">
+                <div class="project-image-gallery">
+                    <img src="../images/canopy_height_model.jpg" alt="Canopy Height Model" class="featured-image">
+                    <div class="image-grid">
+                        <img src="../images/individual_tree_segmentation.jpg" alt="Individual Tree Segmentation">
+                        <img src="../images/dem_visualization.jpg" alt="DEM Visualization">
+                    </div>
+                </div>
+                
+                <div class="project-description">
+                    <h2>Objective</h2>
+                    <p>Develop and implement automated workflows for forest inventory and biomass estimation using LiDAR point cloud data, with a focus on individual tree detection and attribute prediction.</p>
+                    
+                    <h2>Methods</h2>
+                    <h3>Canopy Height Prediction</h3>
+                    <ul>
+                        <li>Processed and normalized LiDAR data using RStudio and the lidR package</li>
+                        <li>Extracted plot-level metrics including height percentiles and density metrics</li>
+                        <li>Built regression models validated against field-measured data</li>
+                        <li>Generated wall-to-wall canopy height maps</li>
+                    </ul>
+                    
+                    <h3>Individual Tree Segmentation</h3>
+                    <ul>
+                        <li>Applied Li2012 and Dalponte2016 algorithms for tree crown delineation</li>
+                        <li>Optimized segmentation parameters for mixed conifer forests</li>
+                        <li>Evaluated accuracy against reference data</li>
+                        <li>Extracted tree-level attributes (height, crown diameter, position)</li>
+                    </ul>
+                    
+                    <h3>LiDAR Data Processing</h3>
+                    <ul>
+                        <li>Loaded and pre-processed LAS files using the lidR package</li>
+                        <li>Performed quality checks and filtering of noise points</li>
+                        <li>Generated Digital Elevation Models (DEMs) and Digital Surface Models (DSMs)</li>
+                        <li>Merged LiDAR with RGB imagery for enhanced visualization</li>
+                    </ul>
+                    
+                    <h2>Outcomes</h2>
+                    <ul>
+                        <li>Achieved high accuracy in canopy height prediction (R² = 0.84)</li>
+                        <li>Successfully segmented individual trees in complex forest structures</li>
+                        <li>Created precise forest attribute maps for ecosystem monitoring</li>
+                        <li>Developed methods for carbon stock assessment at landscape scales</li>
+                        <li>Generated Digital Terrain Models (DTMs) and Canopy Height Models (CHMs)</li>
+                    </ul>
+                    
+                    <h2>Technical Highlights</h2>
+                    <div class="code-snippet">
+                        <pre><code class="language-r">
+# R code example for LiDAR processing and tree segmentation
+library(lidR)
+library(terra)
+library(sf)
 
-            <h3>Methods</h3>
-            <ul>
-                <li>Processed annual cloud-free Sentinel-2 Level-2A composites</li>
-                <li>Applied Random Forest classification (100 trees, 255 polygons)</li>
-                <li>Conducted transition matrix and hotspot analysis</li>
-            </ul>
+# Load and filter LiDAR point cloud
+las <- readLAS("forest_lidar.las", filter = "-drop_z_below 0 -drop_z_above 60")
 
-            <h3>Outcome</h3>
-            <ul>
-                <li>Achieved 97.0%-98.6% accuracy</li>
-                <li>Identified critical ecosystem changes</li>
-                <li>Supported UN SDG 15 and BC's Biodiversity Strategy</li>
-            </ul>
+# Normalize point cloud heights
+las_norm <- normalize_height(las, knnidw())
+
+# Generate digital terrain model (DTM)
+dtm <- grid_terrain(las, algorithm = tin())
+plot(dtm, main = "Digital Terrain Model")
+
+# Generate canopy height model (CHM)
+chm <- grid_canopy(las_norm, res = 0.5, algorithm = p2r())
+plot(chm, main = "Canopy Height Model")
+
+# Individual tree segmentation using Dalponte algorithm
+ttops <- find_trees(las_norm, lmf(ws = 3))
+las_trees <- segment_trees(las_norm, dalponte2016(chm, ttops))
+
+# Extract tree metrics
+tree_metrics <- crown_metrics(las_trees, .stdtreemetrics)
+head(tree_metrics)
+
+# Visualize segmented trees
+plot(las_trees, color = "treeID", size = 3)
+                        </code></pre>
+                    </div>
+                    
+                    <h2>Key Findings</h2>
+                    <p>The analysis provided several important insights for forestry applications:</p>
+                    <ul>
+                        <li>LiDAR-derived height percentiles are strong predictors of forest biomass</li>
+                        <li>The Dalponte2016 algorithm outperformed Li2012 for coniferous tree segmentation</li>
+                        <li>Combining LiDAR with multispectral imagery improves species classification</li>
+                        <li>Point density significantly impacts the accuracy of individual tree detection</li>
+                        <li>Terrain complexity must be considered when normalizing LiDAR point clouds</li>
+                    </ul>
+                    
+                    <h2>Significance</h2>
+                    <p>This project demonstrates the power of LiDAR technology for detailed forest inventory and monitoring. The developed workflows enable cost-effective forest assessment at landscape scales, supporting sustainable forest management, carbon accounting, and ecological research. The methods can be applied to various forest types and integrated with other remote sensing data for comprehensive ecosystem analysis.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+    
+    <!-- Related Projects Section -->
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Projects</h2>
+            <div class="related-grid">
+                <a href="cable_bay_project.html" class="related-card">
+                    <h3>Tracking Coastal Ecosystem Shifts</h3>
+                    <p>Monitoring land cover changes in Cable Bay, BC.</p>
+                </a>
+                <a href="project-grizzly.html" class="related-card">
+                    <h3>Grizzly Bear Movement in Alberta</h3>
+                    <p>Least cost path analysis for wildlife corridors.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="../js/script.js"></script>
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-r.min.js"></script>
+</body>
+</html>

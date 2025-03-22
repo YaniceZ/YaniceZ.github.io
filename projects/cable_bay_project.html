@@ -1,35 +1,158 @@
-<!-- project-coastal.html -->
-<section class="project-detail">
-    <div class="container">
-        <a href="index.html#projects" class="back-button">← Back to Projects</a>
-        
-        <h2>Coastal Ecosystem Shifts: Cable Bay</h2>
-        
-        <!-- Image Gallery -->
-        <div class="project-gallery">
-            <img src="images/coastal-change-map.jpg" alt="Land Cover Change Map 2018-2024">
-            <!-- Add more images as needed -->
-            <img src="images/qgis-polygons.jpg" alt="Classification Polygons">
-            <img src="models/random-forest-output.jpg" alt="Model Output">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tracking Coastal Ecosystem Shifts: Cable Bay, BC</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo">Your Name</a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../index.html#skills">Skills</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="project-content">
-            <h3>Objective</h3>
-            <p>Monitor land cover changes using Sentinel-2 imagery to support conservation efforts.</p>
+    <!-- Project Detail Section -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="back-button">
+                <a href="../index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            </div>
+            
+            <h1>Tracking Coastal Ecosystem Shifts in Cable Bay, BC (2018–2024)</h1>
+            
+            <div class="project-metadata">
+                <span class="project-date">2018–2024</span>
+                <div class="project-tags">
+                    <span class="tag">Remote Sensing</span>
+                    <span class="tag">Image Processing</span>
+                    <span class="tag">Random Forest</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">R</span>
+                    <span class="tag">ArcGIS Pro</span>
+                    <span class="tag">QGIS</span>
+                </div>
+            </div>
+            
+            <div class="project-content-wrapper">
+                <div class="project-image-gallery">
+                    <img src="../images/cable_bay_land_cover_change.jpg" alt="Land Cover Change 2018–2024" class="featured-image">
+                    <div class="image-grid">
+                        <img src="../images/qgis_classification_polygons.jpg" alt="QGIS Manual Classification Polygons">
+                        <img src="../images/random_forest_output.jpg" alt="Random Forest Model Output">
+                    </div>
+                </div>
+                
+                <div class="project-description">
+                    <h2>Objective</h2>
+                    <p>Monitor land cover changes in the Cable Bay coastal ecosystem using Sentinel-2 satellite imagery over a six-year period (2018-2024).</p>
+                    
+                    <h2>Methods</h2>
+                    <ul>
+                        <li>Processed annual cloud-free Sentinel-2 Level-2A composites</li>
+                        <li>Applied Random Forest classification algorithm with 100 trees</li>
+                        <li>Created 255 training polygons for accurate classification</li>
+                        <li>Conducted transition matrix analysis to quantify change</li>
+                        <li>Performed hotspot analysis to identify areas of significant change</li>
+                        <li>Utilized Python, R, ArcGIS Pro, and QGIS for processing and analysis</li>
+                    </ul>
+                    
+                    <h2>Outcomes</h2>
+                    <ul>
+                        <li>Achieved classification accuracy between 97.0% and 98.6%</li>
+                        <li>Revealed significant broadleaf forest loss (1,012 pixels) over the study period</li>
+                        <li>Documented urban growth (131 pixels) impacting coastal ecosystems</li>
+                        <li>Results support UN Sustainable Development Goal 15 (Life on Land)</li>
+                        <li>Findings contribute to British Columbia's Biodiversity Strategy</li>
+                    </ul>
+                    
+                    <h2>Technical Highlights</h2>
+                    <div class="code-snippet">
+                        <pre><code class="language-python">
+# Example of the Random Forest implementation in Python
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.metrics import accuracy_score, confusion_matrix
 
-            <h3>Methods</h3>
-            <ul>
-                <li>Processed annual cloud-free Sentinel-2 Level-2A composites</li>
-                <li>Applied Random Forest classification (100 trees, 255 polygons)</li>
-                <li>Conducted transition matrix and hotspot analysis</li>
-            </ul>
+# Initialize the Random Forest model
+rf_model = RandomForestClassifier(n_estimators=100, random_state=42)
 
-            <h3>Outcome</h3>
-            <ul>
-                <li>Achieved 97.0%-98.6% accuracy</li>
-                <li>Identified critical ecosystem changes</li>
-                <li>Supported UN SDG 15 and BC's Biodiversity Strategy</li>
-            </ul>
+# Train the model
+rf_model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = rf_model.predict(X_test)
+
+# Evaluate accuracy
+accuracy = accuracy_score(y_test, y_pred)
+conf_matrix = confusion_matrix(y_test, y_pred)
+
+print(f"Model Accuracy: {accuracy * 100:.2f}%")
+                        </code></pre>
+                    </div>
+                    
+                    <h2>Key Findings</h2>
+                    <p>The analysis revealed significant ecological transitions in the Cable Bay area over the six-year period. The most notable changes included:</p>
+                    <ul>
+                        <li>Broadleaf forest conversion to urban development along the coastline</li>
+                        <li>Expansion of impervious surfaces impacting watershed dynamics</li>
+                        <li>Shifts in wetland vegetation composition due to changing hydrological patterns</li>
+                        <li>Incremental coastal erosion affecting nearshore habitats</li>
+                    </ul>
+                    
+                    <h2>Significance</h2>
+                    <p>This project demonstrates the power of multi-temporal satellite imagery and machine learning techniques for monitoring environmental change. The high classification accuracy validates the methodology and provides a framework for similar analyses in other coastal regions. The findings have been shared with local conservation authorities to inform habitat protection strategies and sustainable development planning.</p>
+                </div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+    
+    <!-- Related Projects Section -->
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Projects</h2>
+            <div class="related-grid">
+                <a href="project-salmon.html" class="related-card">
+                    <h3>Salmon Stream Network Analysis</h3>
+                    <p>Modeling salmon habitat connectivity for conservation planning.</p>
+                </a>
+                <a href="project-lidar.html" class="related-card">
+                    <h3>LiDAR & Point Cloud Processing</h3>
+                    <p>Forest inventory and biomass estimation using LiDAR.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="../js/script.js"></script>
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+</body>
+</html>

@@ -1,35 +1,71 @@
-<!-- project-coastal.html -->
-<section class="project-detail">
-    <div class="container">
-        <a href="index.html#projects" class="back-button">← Back to Projects</a>
-        
-        <h2>Coastal Ecosystem Shifts: Cable Bay</h2>
-        
-        <!-- Image Gallery -->
-        <div class="project-gallery">
-            <img src="images/coastal-change-map.jpg" alt="Land Cover Change Map 2018-2024">
-            <!-- Add more images as needed -->
-            <img src="images/qgis-polygons.jpg" alt="Classification Polygons">
-            <img src="models/random-forest-output.jpg" alt="Model Output">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grizzly Bear Movement in Alberta</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="../index.html" class="logo">Your Name</a>
+                <ul class="nav-links">
+                    <li><a href="../index.html">Home</a></li>
+                    <li><a href="../index.html#projects">Projects</a></li>
+                    <li><a href="../index.html#skills">Skills</a></li>
+                    <li><a href="../index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
 
-        <div class="project-content">
-            <h3>Objective</h3>
-            <p>Monitor land cover changes using Sentinel-2 imagery to support conservation efforts.</p>
-
-            <h3>Methods</h3>
-            <ul>
-                <li>Processed annual cloud-free Sentinel-2 Level-2A composites</li>
-                <li>Applied Random Forest classification (100 trees, 255 polygons)</li>
-                <li>Conducted transition matrix and hotspot analysis</li>
-            </ul>
-
-            <h3>Outcome</h3>
-            <ul>
-                <li>Achieved 97.0%-98.6% accuracy</li>
-                <li>Identified critical ecosystem changes</li>
-                <li>Supported UN SDG 15 and BC's Biodiversity Strategy</li>
-            </ul>
-        </div>
-    </div>
-</section>
+    <!-- Project Detail Section -->
+    <section class="project-detail">
+        <div class="container">
+            <div class="back-button">
+                <a href="../index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
+            </div>
+            
+            <h1>Grizzly Bear Movement in Alberta</h1>
+            
+            <div class="project-metadata">
+                <span class="project-date">2023</span>
+                <div class="project-tags">
+                    <span class="tag">Least Cost Path</span>
+                    <span class="tag">Wildlife Corridors</span>
+                    <span class="tag">GIS Analysis</span>
+                    <span class="tag">ArcGIS Pro</span>
+                    <span class="tag">QGIS</span>
+                    <span class="tag">GDAL</span>
+                </div>
+            </div>
+            
+            <div class="project-content-wrapper">
+                <div class="project-image-gallery">
+                    <img src="../images/least_cost_path_result.jpg" alt="Least Cost Path Result" class="featured-image">
+                    <div class="image-grid">
+                        <img src="../images/cost_surface_map.jpg" alt="Cost Surface Map">
+                        <img src="../images/grizzly_habitat_suitability.jpg" alt="Grizzly Habitat Suitability">
+                    </div>
+                </div>
+                
+                <div class="project-description">
+                    <h2>Objective</h2>
+                    <p>Model optimal wildlife corridors for grizzly bears in Alberta using least cost path analysis to support conservation planning and wildlife management strategies.</p>
+                    
+                    <h2>Methods</h2>
+                    <ul>
+                        <li>Integrated multiple environmental variables into a comprehensive cost surface:
+                            <ul>
+                                <li>Land cover (40% weight) - prioritizing forest cover and natural areas</li>
+                                <li>Road proximity (40% weight) - accounting for barrier effects and mortality risk</li>
+                                <li>Slope (20% weight) - considering energy expenditure in movement</li>
+                            </ul>
+                        </li>
+                        <li>Processed and prepared spatial data using ArcGIS Pro, QGIS, and GDAL</li>
+                        <li>Applied a weighted overlay approach to combine cost factors</li>

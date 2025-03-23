@@ -7,6 +7,39 @@
     <link rel="stylesheet" href="../css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 添加图片尺寸控制样式 */
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            max-height: 250px;
+            object-fit: contain;
+        }
+        
+        .project-metadata .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -47,9 +80,9 @@
             
             <div class="project-content-wrapper">
                 <div class="project-image-gallery">
-                    <img src="images/project_image/layout_GEM521/lab4_Images of  Dominant Tree Height Model.png" alt="Canopy Height Model" class="featured-image">
+                    <img src="../images/project_image/layout_GEM521/lab4_Images_of_Dominant_Tree_Height_Model.png" alt="Canopy Height Model" class="featured-image">
                     <div class="image-grid">
-                        <img src="images/project_image/layout_GEM521/lab4_scatterplots of predicted vs. measured values of  Dominant Tree Height Model.png" alt="Scatterplots of predicted vs. measured values">
+                        <img src="../images/project_image/layout_GEM521/lab4_scatterplots_of_predicted_vs_measured_values_of_Dominant_Tree_Height_Model.png" alt="Scatterplots of predicted vs. measured values">
                     </div>
                 </div>
                 
@@ -164,7 +197,7 @@ plot(las_trees, color = "treeID", size = 3)
     <footer>
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <p>&copy; 2025 Yanice Zeng. All rights reserved.</p>
                 <div class="social-links">
                     <a href="https://github.com/yanicez" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:yanicezeng28@gmail.com"><i class="fas fa-envelope"></i></a>

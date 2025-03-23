@@ -7,6 +7,44 @@
     <link rel="stylesheet" href="../css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 添加图片尺寸控制样式 */
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .project-tags .tag img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+        
+        .project-metadata .tag {
+            display: inline-block;
+            background-color: #f0f0f0;
+            padding: 5px 10px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+    </style>
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -23,7 +61,6 @@
             </nav>
         </div>
     </header>
-
     <!-- Project Detail Section -->
     <section class="project-detail">
         <div class="container">
@@ -47,8 +84,9 @@
             
             <div class="project-content-wrapper">
                 <div class="project-image-gallery">
-                    <img src="images/project_image/layout_GEM510/lab5_least_cost_path.jpg" alt="Least Cost Path Result" class="featured-image">
+                    <img src="../images/project_image/layout_GEM510/lab5_least_cost_path.jpg" alt="Least Cost Path Result" class="featured-image">
                     <div class="image-grid">
+                        <!-- 如果有更多图片，可以在此处添加 -->
                     </div>
                 </div>
                 
@@ -67,3 +105,105 @@
                         </li>
                         <li>Processed and prepared spatial data using ArcGIS Pro, QGIS, and GDAL</li>
                         <li>Applied a weighted overlay approach to combine cost factors</li>
+                    </ul>
+                    
+                    <h2>Outcomes</h2>
+                    <ul>
+                        <li>Identified optimal movement corridors connecting key habitat patches</li>
+                        <li>Highlighted critical pinch points where corridors narrow due to natural or human barriers</li>
+                        <li>Revealed areas where infrastructure development could threaten connectivity</li>
+                        <li>Provided decision support for conservation planning and land management</li>
+                    </ul>
+                    
+                    <h2>Technical Highlights</h2>
+                    <div class="code-snippet">
+                        <pre><code class="language-python">
+# Example of cost distance calculation in Python with GDAL
+import gdal
+import numpy as np
+from skimage.graph import route_through_array
+
+def calculate_least_cost_path(cost_surface, start_point, end_point):
+    """Calculate the least cost path through a cost surface."""
+    # Read cost surface raster
+    ds = gdal.Open(cost_surface)
+    band = ds.GetRasterBand(1)
+    array = band.ReadAsArray()
+    
+    # Get geotransform information
+    geotransform = ds.GetGeoTransform()
+    
+    # Convert geographic coordinates to array indices
+    start_idx = (
+        int((start_point[0] - geotransform[0]) / geotransform[1]),
+        int((start_point[1] - geotransform[3]) / geotransform[5])
+    )
+    end_idx = (
+        int((end_point[0] - geotransform[0]) / geotransform[1]),
+        int((end_point[1] - geotransform[3]) / geotransform[5])
+    )
+    
+    # Calculate least cost path
+    indices, weight = route_through_array(
+        array, start_idx, end_idx,
+        fully_connected=True
+    )
+    
+    return indices, weight
+                        </code></pre>
+                    </div>
+                    
+                    <h2>Key Findings</h2>
+                    <p>The analysis revealed several important insights for grizzly bear conservation in Alberta:</p>
+                    <ul>
+                        <li>Forest cover is the most critical factor determining movement routes</li>
+                        <li>Highway 1 represents a significant barrier to north-south movement</li>
+                        <li>Riparian corridors serve as important movement pathways</li>
+                        <li>Several existing protected areas are not well connected for bear movement</li>
+                    </ul>
+                    
+                    <h2>Significance</h2>
+                    <p>This project contributes to wildlife conservation by providing evidence-based planning tools for habitat connectivity. The identified corridors can inform land use decisions, highway crossing structure placement, and protected area designation. The methodology also demonstrates the value of integrating multiple environmental factors in movement modeling, offering a more nuanced understanding of wildlife mobility in complex landscapes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Related Projects Section -->
+    <section class="related-projects">
+        <div class="container">
+            <h2>Related Projects</h2>
+            <div class="related-grid">
+                <a href="project-wildlife-tracking.html" class="related-card">
+                    <h3>Wildlife Tracking Analysis</h3>
+                    <p>Analyzing GPS collar data for multiple wildlife species.</p>
+                </a>
+                <a href="project-protected-areas.html" class="related-card">
+                    <h3>Protected Area Connectivity</h3>
+                    <p>Assessing landscape connectivity between protected areas.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2025 Yanice Zeng. All rights reserved.</p>
+                <div class="social-links">
+                    <a href="https://github.com/yanicez" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="mailto:yanicezeng28@gmail.com"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/yanice-zeng" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- JavaScript -->
+    <script src="../js/script.js"></script>
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+</body>
+</html>

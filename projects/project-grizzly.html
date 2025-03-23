@@ -4,45 +4,576 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grizzly Bear Movement in Alberta</title>
-    <link rel="stylesheet" href="../css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap">
     <style>
-        /* 添加图片尺寸控制样式 */
+        :root {
+            --primary-color: #2D6A4F;
+            --primary-light: #40916C;
+            --primary-dark: #1B4332;
+            --secondary-color: #D8F3DC;
+            --accent-color: #FF7F50;
+            --text-color: #333333;
+            --text-light: #666666;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --dark-bg: #212529;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '';
+            position: absolute;
+            bottom: -3px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: var(--transition);
+        }
+
+        .logo:hover::after {
+            transform: scaleX(1);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 5px 0;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        /* Project Detail Section */
+        .project-detail {
+            padding: 60px 0;
+            background-color: var(--white);
+        }
+
+        .back-button {
+            margin-bottom: 25px;
+        }
+
+        .back-button a {
+            color: var(--primary-color);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .back-button a i {
+            margin-right: 8px;
+        }
+
+        .back-button a:hover {
+            color: var(--primary-dark);
+            transform: translateX(-5px);
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            line-height: 1.3;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            margin-top: 15px;
+            border-radius: 2px;
+        }
+
+        .project-metadata {
+            margin-bottom: 30px;
+        }
+
+        .project-date {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-right: 20px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .tag {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            background-color: var(--secondary-color);
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary-dark);
+            transition: var(--transition);
+        }
+
+        .tag:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--box-shadow);
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+
+        .project-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .stat-card {
+            background-color: var(--white);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            background-color: var(--primary-light);
+            color: var(--white);
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 5px;
+            transition: var(--transition);
+        }
+
+        .stat-card:hover .stat-number {
+            color: var(--white);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover .stat-label {
+            color: var(--secondary-color);
+        }
+
+        .project-content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .project-image-gallery {
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+        }
+
+        .project-image-gallery:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        }
+
         .featured-image {
             width: 100%;
             height: auto;
-            max-height: 500px;
+            max-height: 400px;
             object-fit: cover;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            transition: transform 0.5s ease;
         }
-        
+
+        .project-image-gallery:hover .featured-image {
+            transform: scale(1.03);
+        }
+
         .image-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
             margin-top: 10px;
         }
-        
+
         .image-grid img {
             width: 100%;
-            height: 250px;
+            height: 200px;
             object-fit: cover;
+            border-radius: var(--border-radius);
+            transition: transform 0.5s ease;
         }
-        
-        .project-tags .tag img {
-            width: 20px;
-            height: 20px;
-            margin-right: 5px;
+
+        .image-grid img:hover {
+            transform: scale(1.05);
         }
-        
-        .project-metadata .tag {
-            display: inline-block;
-            background-color: #f0f0f0;
-            padding: 5px 10px;
-            margin-right: 8px;
-            margin-bottom: 8px;
-            border-radius: 4px;
-            font-size: 0.9em;
+
+        .project-description {
+            padding: 20px 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            margin-top: 30px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-color);
+            line-height: 1.8;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        ul li {
+            margin-bottom: 10px;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        ul li::before {
+            content: '•';
+            color: var(--accent-color);
+            font-weight: bold;
+            position: absolute;
+            left: -5px;
+        }
+
+        .code-snippet {
+            background-color: #f6f8fa;
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 30px;
+            overflow-x: auto;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        pre {
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            font-size: 14px;
+            line-height: 1.5;
+            color: #24292e;
+        }
+
+        /* Related Projects Section */
+        .related-projects {
+            padding: 60px 0;
+            background-color: var(--light-bg);
+        }
+
+        .related-projects h2 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-family: 'Playfair Display', serif;
+            font-size: 32px;
+            color: var(--primary-dark);
+            padding-left: 0;
+        }
+
+        .related-projects h2::before {
+            display: none;
+        }
+
+        .related-projects h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            margin: 15px auto 0;
+            border-radius: 2px;
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .related-card {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            box-shadow: var(--box-shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .related-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--primary-color), var(--primary-light));
+            z-index: -1;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .related-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .related-card:hover::before {
+            opacity: 1;
+        }
+
+        .related-card h3 {
+            font-size: 22px;
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            transition: var(--transition);
+        }
+
+        .related-card p {
+            color: var(--text-light);
+            margin-bottom: 0;
+            transition: var(--transition);
+        }
+
+        .related-card:hover h3,
+        .related-card:hover p {
+            color: var(--white);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--white);
+            padding: 40px 0;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            font-size: 22px;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+            transform: translateY(-3px);
+        }
+
+        /* Animation Classes */
+        .fade-in {
+            animation: fadeIn 0.8s ease forwards;
+        }
+
+        .slide-up {
+            animation: slideUp 0.8s ease forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .project-content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .project-image-gallery {
+                margin-bottom: 30px;
+            }
+            
+            .project-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .related-grid {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            nav {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+                width: 100%;
+            }
+
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .project-tags {
+                flex-direction: column;
+                align-items: flex-start;
+            }
         }
     </style>
 </head>
@@ -56,41 +587,82 @@
                     <li><a href="../index.html">Home</a></li>
                     <li><a href="../index.html#projects">Projects</a></li>
                     <li><a href="../index.html#skills">Skills</a></li>
+                    <li><a href="../index.html#about">About</a></li>
                     <li><a href="../index.html#contact">Contact</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+
     <!-- Project Detail Section -->
     <section class="project-detail">
         <div class="container">
-            <div class="back-button">
+            <div class="back-button fade-in">
                 <a href="../index.html#projects"><i class="fas fa-arrow-left"></i> Back to Projects</a>
             </div>
             
-            <h1>Grizzly Bear Movement in Alberta</h1>
+            <h1 class="fade-in">Grizzly Bear Movement in Alberta</h1>
             
-            <div class="project-metadata">
+            <div class="project-metadata fade-in">
                 <span class="project-date">2023</span>
                 <div class="project-tags">
-                    <span class="tag">Least Cost Path</span>
-                    <span class="tag">Wildlife Corridors</span>
-                    <span class="tag">GIS Analysis</span>
-                    <span class="tag">ArcGIS Pro</span>
-                    <span class="tag">QGIS</span>
-                    <span class="tag">GDAL</span>
+                    <div class="tag">
+                        <i class="fas fa-route" style="color: var(--primary-dark); margin-right: 8px;"></i>
+                        <span>Least Cost Path</span>
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-paw" style="color: var(--primary-dark); margin-right: 8px;"></i>
+                        <span>Wildlife Corridors</span>
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-map-marked-alt" style="color: var(--primary-dark); margin-right: 8px;"></i>
+                        <span>GIS Analysis</span>
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-globe-americas" style="color: var(--primary-dark); margin-right: 8px;"></i>
+                        <span>ArcGIS Pro</span>
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-layer-group" style="color: var(--primary-dark); margin-right: 8px;"></i>
+                        <span>QGIS</span>
+                    </div>
+                    <div class="tag">
+                        <i class="fas fa-code" style="color: var(--primary-dark); margin-right: 8px;"></i>
+                        <span>GDAL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="project-stats slide-up">
+                <div class="stat-card">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Land Cover Weight</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">40%</div>
+                    <div class="stat-label">Road Proximity Weight</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">20%</div>
+                    <div class="stat-label">Slope Weight</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Environmental Variables</div>
                 </div>
             </div>
             
             <div class="project-content-wrapper">
-                <div class="project-image-gallery">
+                <div class="project-image-gallery slide-up">
                     <img src="../images/project_image/layout_GEM510/lab5_least_cost_path.jpg" alt="Least Cost Path Result" class="featured-image">
                     <div class="image-grid">
-                        <!-- 如果有更多图片，可以在此处添加 -->
+                        <!-- Placeholder for additional images -->
+                        <img src="/api/placeholder/400/320" alt="Wildlife corridor analysis" />
+                        <img src="/api/placeholder/400/320" alt="Bear habitat model" />
                     </div>
                 </div>
                 
-                <div class="project-description">
+                <div class="project-description slide-up">
                     <h2>Objective</h2>
                     <p>Model optimal wildlife corridors for grizzly bears in Alberta using least cost path analysis to support conservation planning and wildlife management strategies.</p>
                     
@@ -105,14 +677,8 @@
                         </li>
                         <li>Processed and prepared spatial data using ArcGIS Pro, QGIS, and GDAL</li>
                         <li>Applied a weighted overlay approach to combine cost factors</li>
-                    </ul>
-                    
-                    <h2>Outcomes</h2>
-                    <ul>
-                        <li>Identified optimal movement corridors connecting key habitat patches</li>
-                        <li>Highlighted critical pinch points where corridors narrow due to natural or human barriers</li>
-                        <li>Revealed areas where infrastructure development could threaten connectivity</li>
-                        <li>Provided decision support for conservation planning and land management</li>
+                        <li>Calculated optimal movement paths between key habitat patches</li>
+                        <li>Verified results with field observations and existing research</li>
                     </ul>
                     
                     <h2>Technical Highlights</h2>
@@ -153,6 +719,15 @@ def calculate_least_cost_path(cost_surface, start_point, end_point):
                         </code></pre>
                     </div>
                     
+                    <h2>Outcomes</h2>
+                    <ul>
+                        <li>Identified optimal movement corridors connecting key habitat patches</li>
+                        <li>Highlighted critical pinch points where corridors narrow due to natural or human barriers</li>
+                        <li>Revealed areas where infrastructure development could threaten connectivity</li>
+                        <li>Provided decision support for conservation planning and land management</li>
+                        <li>Created detailed corridor maps for stakeholder engagement</li>
+                    </ul>
+                    
                     <h2>Key Findings</h2>
                     <p>The analysis revealed several important insights for grizzly bear conservation in Alberta:</p>
                     <ul>
@@ -160,6 +735,7 @@ def calculate_least_cost_path(cost_surface, start_point, end_point):
                         <li>Highway 1 represents a significant barrier to north-south movement</li>
                         <li>Riparian corridors serve as important movement pathways</li>
                         <li>Several existing protected areas are not well connected for bear movement</li>
+                        <li>Strategic land protection could significantly improve habitat connectivity</li>
                     </ul>
                     
                     <h2>Significance</h2>
@@ -174,13 +750,13 @@ def calculate_least_cost_path(cost_surface, start_point, end_point):
         <div class="container">
             <h2>Related Projects</h2>
             <div class="related-grid">
-                <a href="project-wildlife-tracking.html" class="related-card">
+                <a href="project-wildlife-tracking.html" class="related-card slide-up">
                     <h3>Wildlife Tracking Analysis</h3>
-                    <p>Analyzing GPS collar data for multiple wildlife species.</p>
+                    <p>Analyzing GPS collar data for multiple wildlife species to understand movement patterns, habitat selection, and behavioral responses to environmental changes.</p>
                 </a>
-                <a href="project-protected-areas.html" class="related-card">
+                <a href="project-protected-areas.html" class="related-card slide-up">
                     <h3>Protected Area Connectivity</h3>
-                    <p>Assessing landscape connectivity between protected areas.</p>
+                    <p>Assessing landscape connectivity between protected areas to identify potential wildlife corridors and prioritize conservation efforts for maximum ecological benefit.</p>
                 </a>
             </div>
         </div>
@@ -195,15 +771,56 @@ def calculate_least_cost_path(cost_surface, start_point, end_point):
                     <a href="https://github.com/yanicez" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:yanicezeng28@gmail.com"><i class="fas fa-envelope"></i></a>
                     <a href="https://www.linkedin.com/in/yanice-zeng" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-researchgate"></i></a>
                 </div>
             </div>
         </div>
     </footer>
     
     <!-- JavaScript -->
-    <script src="../js/script.js"></script>
-    <!-- Prism.js for code highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script>
+        // Animate elements when they come into view
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add animation classes
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (!entry.target.classList.contains('fade-in') && !entry.target.classList.contains('slide-up')) {
+                            entry.target.classList.add('fade-in');
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            // Observe all sections
+            document.querySelectorAll('section').forEach(section => {
+                observer.observe(section);
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

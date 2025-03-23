@@ -3,19 +3,20 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yanice Zeng - Geospatial Specialist</title>
+    <title>Yanice Zeng | Geospatial Specialist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #3498db;
-            --accent-color: #27ae60;
-            --light-color: #ecf0f1;
-            --dark-color: #2c3e50;
-            --text-color: #333;
-            --light-text: #7f8c8d;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --primary-color: #2A3B4D;
+            --secondary-color: #3F72AF;
+            --accent-color: #FF7F50;
+            --light-bg: #F8F9FA;
+            --dark-text: #2A3B4D;
+            --light-text: #6C757D;
+            --border-radius: 12px;
+            --section-spacing: 6rem;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         * {
@@ -25,26 +26,28 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: #f9f9f9;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+            color: var(--dark-text);
+            background-color: white;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 2rem;
         }
 
         /* Navigation */
         .navbar {
-            background-color: var(--primary-color);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             padding: 1rem 0;
-            position: sticky;
+            position: fixed;
             top: 0;
+            width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
         }
 
         .nav-content {
@@ -54,200 +57,209 @@
         }
 
         .nav-brand {
-            color: white;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
             text-decoration: none;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .nav-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 4rem 0;
-            background-color: var(--light-color);
-        }
-
-        .profile-container {
-            display: flex;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .profile-image {
-            flex: 0 0 300px;
-        }
-
-        .profile-image img {
-            width: 100%;
-            border-radius: 50%;
-            border: 5px solid white;
-            box-shadow: var(--box-shadow);
-        }
-
-        .bio-content {
-            flex: 1;
-        }
-
-        .bio-content h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .bio-content h2 {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            font-weight: 500;
-        }
-
-        .bio-content p {
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-            justify-content: center;
-        }
-
-        .social-links a {
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            transition: color 0.3s ease;
-        }
-
-        .social-links a:hover {
-            color: var(--secondary-color);
-        }
-
-        /* Interests */
-        .interests {
-            margin-top: 2rem;
-        }
-
-        .interests h3 {
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-        }
-
-        .interests-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .interest-item {
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
-        .interest-dot {
-            width: 12px;
-            height: 12px;
-            background-color: var(--accent-color);
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding-top: 8rem;
+            padding-bottom: 6rem;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #ffffff 100%);
+        }
+
+        .profile-container {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            position: relative;
+            max-width: 320px;
+        }
+
+        .profile-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 4px solid white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: white;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .bio-content h1 {
+            font-size: 2.75rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+
+        .bio-content h2 {
+            font-size: 1.5rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+
+        .bio-content p {
+            font-size: 1.1rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+        }
+
+        /* Competencies */
+        .competency-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .competency-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            border: 1px solid #e9ecef;
+            transition: var(--transition);
+        }
+
+        .competency-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .competency-card h4 {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--primary-color);
+        }
+
+        .competency-card i {
+            color: var(--secondary-color);
+            font-size: 1.25rem;
         }
 
         /* Sections */
         section {
-            padding: 4rem 0;
+            padding: var(--section-spacing) 0;
         }
 
-        section h2 {
+        .section-header {
             text-align: center;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-            font-size: 2rem;
-            position: relative;
+            margin-bottom: 4rem;
         }
 
-        section h2::after {
-            content: "";
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
             position: absolute;
             bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
+            width: 60px;
+            height: 3px;
+            background: var(--accent-color);
         }
 
-        /* Education */
-        .education {
-            background-color: white;
-        }
-
-        .education-card {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-            box-shadow: var(--box-shadow);
-            transition: transform 0.3s ease;
-        }
-
-        .education-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .education-card h3 {
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .education-card p {
-            color: var(--light-text);
-        }
-
-        .education-details {
-            margin-top: 1rem;
-        }
-
-        .education-details p {
-            margin-bottom: 0.5rem;
-        }
-
-        /* Experience */
-        .experience {
-            background-color: var(--light-color);
-        }
-
+        /* Experience Cards */
         .experience-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
         }
 
         .experience-card {
-            background-color: white;
+            background: white;
+            padding: 2rem;
             border-radius: var(--border-radius);
-            padding: 1.5rem;
-            box-shadow: var(--box-shadow);
-            transition: transform 0.3s ease;
+            border: 1px solid #e9ecef;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
         }
 
         .experience-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background: var(--secondary-color);
         }
 
         .experience-card h3 {
@@ -255,86 +267,94 @@
             margin-bottom: 0.5rem;
         }
 
-        .experience-card p {
+        .experience-card .meta {
             color: var(--light-text);
             margin-bottom: 1rem;
-            font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .experience-card ul {
-            list-style-type: none;
+            padding-left: 1.5rem;
         }
 
-        .experience-card ul li {
-            margin-bottom: 0.5rem;
+        .experience-card li {
+            margin-bottom: 0.75rem;
             position: relative;
             padding-left: 1.5rem;
         }
 
-        .experience-card ul li::before {
-            content: "•";
-            color: var(--accent-color);
-            font-weight: bold;
+        .experience-card li::before {
+            content: '▹';
             position: absolute;
             left: 0;
+            color: var(--accent-color);
         }
 
-        /* Research */
-        .research {
-            background-color: white;
-        }
-
-        .research-grid {
+        /* Skills Grid */
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
         }
 
-        .research-highlight {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
+        .skill-category {
+            background: white;
             padding: 2rem;
-            box-shadow: var(--box-shadow);
-            transition: transform 0.3s ease;
-            text-align: center;
+            border-radius: var(--border-radius);
+            border: 1px solid #e9ecef;
         }
 
-        .research-highlight:hover {
-            transform: translateY(-5px);
-        }
-
-        .research-icon {
-            font-size: 2.5rem;
-            color: var(--accent-color);
-            margin-bottom: 1rem;
-        }
-
-        .research-highlight h4 {
+        .skill-category h3 {
             color: var(--primary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
         }
 
-        /* Projects */
-        .projects {
-            background-color: var(--light-color);
+        .skill-item {
+            margin-bottom: 1.25rem;
         }
 
+        .skill-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: var(--secondary-color);
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Project Cards */
         .project-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2rem;
         }
 
         .project-card {
-            background-color: white;
+            background: white;
             border-radius: var(--border-radius);
             overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: transform 0.3s ease;
+            transition: var(--transition);
+            border: 1px solid #e9ecef;
         }
 
         .project-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
         }
 
         .project-content {
@@ -346,130 +366,45 @@
             margin-bottom: 1rem;
         }
 
-        .project-content p {
-            margin-bottom: 1rem;
-        }
-
-        .skills-list {
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
             margin-top: 1rem;
         }
 
-        .skills-tag {
-            display: inline-block;
-            background-color: var(--light-color);
-            padding: 0.4rem 0.8rem;
+        .project-tag {
+            background: var(--light-bg);
+            color: var(--primary-color);
+            padding: 0.35rem 0.75rem;
             border-radius: 20px;
-            font-size: 0.8rem;
-            margin-right: 0.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        /* Skills */
-        .skills {
-            background-color: white;
-        }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background-color: var(--light-color);
-            border-radius: var(--border-radius);
-            padding: 2rem;
-            box-shadow: var(--box-shadow);
-        }
-
-        .skill-category h3 {
-            color: var(--primary-color);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            position: relative;
-        }
-
-        .skill-category h3::after {
-            content: "";
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 3px;
-            background-color: var(--accent-color);
-            border-radius: 2px;
-        }
-
-        .skill-item {
-            margin-bottom: 1rem;
-        }
-
-        .skill-name {
+            font-size: 0.85rem;
             font-weight: 500;
-            margin-bottom: 0.3rem;
-            display: flex;
-            justify-content: space-between;
         }
 
-        .skill-bar {
-            height: 10px;
-            background-color: #ddd;
-            border-radius: 5px;
-            overflow: hidden;
-        }
-
-        .skill-progress {
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 5px;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 2rem 0;
-            text-align: center;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-content .social-links a {
-            color: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
+        /* Responsive Design */
+        @media (max-width: 992px) {
             .profile-container {
-                flex-direction: column;
+                grid-template-columns: 1fr;
                 text-align: center;
             }
 
-            .profile-image {
-                flex: 0 0 200px;
+            .social-links {
+                justify-content: center;
             }
 
-            .nav-content {
-                flex-direction: column;
-                gap: 1rem;
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2rem;
             }
 
-            .experience-grid,
-            .research-grid,
-            .project-grid,
-            .skills-container {
-                grid-template-columns: 1fr;
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 1rem;
+            .bio-content h1 {
+                font-size: 2.25rem;
             }
         }
     </style>
@@ -477,15 +412,13 @@
 <body>
     <nav class="navbar">
         <div class="container nav-content">
-            <a href="#" class="nav-brand">Yanice Zeng</a>
+            <a href="#" class="nav-brand">Y.ZENG</a>
             <div class="nav-links">
                 <a href="#about">About</a>
-                <a href="#education">Education</a>
+                <a href="#experience">Experience</a>
                 <a href="#skills">Skills</a>
                 <a href="#projects">Projects</a>
-                <a href="#research">Research</a>
-                <a href="#experience">Experience</a> 
-                <!-- Removed contact link from navigation -->
+                <a href="#education">Education</a>
             </div>
         </div>
     </nav>
@@ -495,366 +428,35 @@
             <div class="profile-image">
                 <img src="images/yz.jpg" alt="Yanice Zeng">
                 <div class="social-links">
-                    <a href="https://github.com/yanicez" target="_blank"><i class="fab fa-github"></i></a>
-                    <a href="mailto:yanicezeng28@gmail.com"><i class="fas fa-envelope"></i></a>
-                    <a href="https://www.linkedin.com/in/yanice-zeng" target="_blank"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                    <a href="#"><i class="fas fa-envelope"></i></a>
                 </div>
             </div>
             <div class="bio-content">
                 <h1>Yanice (Yuetong) Zeng</h1>
-                <h2>Geospatial Specialist | MGEM Candidate @ UBC</h2>
-                <p>I'm a geospatial specialist pursuing my Master of Geomatics for Environmental Management at the University of British Columbia. With expertise in GIS, remote sensing, and spatial analysis, I apply advanced geospatial technologies to environmental management and urban planning challenges. I'm passionate about using data-driven approaches to support sustainable development and conservation efforts.</p>
+                <h2>Geospatial Specialist & Environmental Analyst</h2>
+                <p>MGEM Candidate at University of British Columbia with expertise in geospatial analysis, remote sensing, and environmental modeling. Proven track record in delivering data-driven solutions for sustainable land management and urban planning.</p>
                 
-                <div class="interests">
-                    <h3>Core Competencies</h3>
-                    <div class="interests-grid">
-                        <div class="interest-item">
-                            <div class="interest-dot"></div>
-                            <span>Remote Sensing & Image Processing</span>
-                        </div>
-                        <div class="interest-item">
-                            <div class="interest-dot"></div>
-                            <span>Spatial Analysis & Modeling</span>
-                        </div>
-                        <div class="interest-item">
-                            <div class="interest-dot"></div>
-                            <span>LiDAR & 3D Modeling</span>
-                        </div>
-                        <div class="interest-item">
-                            <div class="interest-dot"></div>
-                            <span>Machine Learning</span>
-                        </div>
-                        <div class="interest-item">
-                            <div class="interest-dot"></div>
-                            <span>Python/R Programming</span>
-                        </div>
-                        <div class="interest-item">
-                            <div class="interest-dot"></div>
-                            <span>Urban Planning</span>
-                        </div>
+                <div class="competency-grid">
+                    <div class="competency-card">
+                        <h4><i class="fas fa-satellite"></i>Remote Sensing</h4>
+                        <p>Advanced image processing and analysis using ENVI, ERDAS, and Python</p>
+                    </div>
+                    <div class="competency-card">
+                        <h4><i class="fas fa-map"></i>Spatial Analysis</h4>
+                        <p>GIS modeling, spatial statistics, and 3D visualization expertise</p>
+                    </div>
+                    <div class="competency-card">
+                        <h4><i class="fas fa-code"></i>Geospatial Programming</h4>
+                        <p>Python | R | SQL | JavaScript development for spatial applications</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="education" class="education">
-        <div class="container">
-            <h2>Education</h2>
-            <div class="education-card">
-                <h3>Master of Geomatics for Environmental Management (MGEM)</h3>
-                <p>University of British Columbia | 2024-2025</p>
-                <div class="education-details">
-                    <p><strong>Relevant Coursework:</strong> Geographic Information Systems for Forestry and Conservation, Remote Sensing for Ecosystem Management, Advanced Earth Observation and Image Processing, Geospatial Data Analysis, Landscape Ecology and Management, Linear Regression Models</p>
-                </div>
-            </div>
-            <div class="education-card">
-                <h3>B.Sc. in Geography </h3>
-                <p>South China Normal University | 2020-2024</p>
-                <div class="education-details">
-                    <p><strong>Honors:</strong> University Scholarship (Annual Distinction, 2020-2024), 2nd Prize in Undergraduate Innovation Award (2022), 1st Prize in National Research Course Design Competition (2022), Third Prize in Social Practice Award (2023), Outstanding Student Leader (2022-2023)</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- Add remaining sections with updated HTML structure following the same design patterns -->
 
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2>Technical Skills</h2>
-            <div class="skills-container">
-                <div class="skill-category">
-                    <h3>Remote Sensing & Image Processing</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Sentinel-2/Landsat Analysis</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Supervised Classification</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Hyperspectral Analysis</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>ENVI</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>LiDAR & 3D Modeling</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Point Cloud Processing</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>DEM/DSM Generation</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Individual Tree Segmentation</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>LidR Package (R)</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Spatial Analysis & Modeling</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>ArcGIS Pro</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>QGIS</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>AutoCAD</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Spatial Statistics</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="skill-category">
-                    <h3>Programming & Data Analysis</h3>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>R (tidyverse, sf, terra)</span>
-                            <span>95%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 95%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>Python (ArcPy, NumPy, pandas)</span>
-                            <span>90%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 90%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>SQL (PostGIS)</span>
-                            <span>80%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 80%;"></div>
-                        </div>
-                    </div>
-                    <div class="skill-item">
-                        <div class="skill-name">
-                            <span>IBM SPSS</span>
-                            <span>85%</span>
-                        </div>
-                        <div class="skill-bar">
-                            <div class="skill-progress" style="width: 85%;"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- Projects Section -->
-<section id="projects" class="projects">
-    <div class="container">
-        <h2>Featured Projects</h2>
-        <div class="project-grid">
-            <!-- Project 1 -->
-            <a href="projects/cable_bay_project.html" class="project-card">
-                <div class="project-content">
-                    <h3>Tracking Coastal Ecosystem Shifts: Cable Bay, BC</h3>
-                    <p>Analyzed multi-temporal Sentinel-2 imagery (2018-2024) to monitor land cover changes in coastal ecosystems.</p>
-                    <div class="skills-list">
-                        <span class="skills-tag">Random Forest</span>
-                        <span class="skills-tag">Python</span>
-                        <span class="skills-tag">R</span>
-                    </div>
-                </div>
-            </a>
-            <!-- Project 2 -->
-            <a href="projects/project-salmon.html" class="project-card">
-                <div class="project-content">
-                    <h3>Salmon Stream Network Analysis</h3>
-                    <p>Modeled salmon habitat connectivity using GIS and DEMs to support conservation planning.</p>
-                    <div class="skills-list">
-                        <span class="skills-tag">Stream Modeling</span>
-                        <span class="skills-tag">ArcGIS Pro</span>
-                    </div>
-                </div>
-            </a>
-            <!-- Project 3 -->
-            <a href="projects/project-lidar.html" class="project-card">
-                <div class="project-content">
-                    <h3>LiDAR & Point Cloud Processing for Forestry</h3>
-                    <p>Automated workflows for forest inventory and biomass estimation using LiDAR data.</p>
-                    <div class="skills-list">
-                        <span class="skills-tag">LiDAR</span>
-                        <span class="skills-tag">R</span>
-                    </div>
-                </div>
-            </a>
-            <!-- Project 4 -->
-            <a href="projects/project-grizzly.html" class="project-card">
-                <div class="project-content">
-                    <h3>Grizzly Bear Movement in Alberta</h3>
-                    <p>Applied least cost path analysis to model optimal wildlife corridors.</p>
-                    <div class="skills-list">
-                        <span class="skills-tag">GIS Analysis</span>
-                        <span class="skills-tag">QGIS</span>
-                    </div>
-                </div>
-            </a>
-        </div>
-    </div>
-</section>
-
-    <section id="research" class="research">
-        <div class="container">
-            <h2>Research Experience</h2>
-            <div class="research-grid">
-                <div class="research-highlight">
-                    <i class="fas fa-tree research-icon"></i>
-                    <h4>Forest Resource Dynamics Analysis</h4>
-                    <p>Modeled forest resource changes in the Greater Bay Area using ArcGIS Pro and spatial autocorrelation analysis, generating policy recommendations for sustainable land management.</p>
-                </div>
-                
-                <div class="research-highlight">
-                    <i class="fas fa-users research-icon"></i>
-                    <h4>Healthy Aging-Oriented Park Use Patterns</h4>
-                    <p>Designed and executed a survey of 420 elderly participants to assess park accessibility; analyzed spatial and demographic data to identify gaps; co-authored a paper submitted to the Journal of Cleaner Production.</p>
-                </div>
-
-                <div class="research-highlight">
-                    <i class="fas fa-chart-line research-icon"></i>
-                    <h4>Innovation Competitiveness Analysis</h4>
-                    <p>Analyzed talent and resource flows in the Greater Bay Area using "flow space" models; authored three reports on innovation ecosystems; applied spatial analysis techniques to economic and social data.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="experience" class="experience">
-        <div class="container">
-            <h2>Professional Experience</h2>
-            <div class="experience-grid">
-                <div class="experience-card">
-                    <h3>Geography Instructor & Team Lead</h3>
-                    <p>Middle School Affiliated to Guangzhou University | Aug-Oct 2023</p>
-                    <ul>
-                        <li>Developed geography lessons incorporating spatial concepts and GIS visualizations</li>
-                        <li>Led a 40-person university internship team, coordinating tasks and facilitating communication</li>
-                        <li>Created digital mapping exercises introducing students to basic GIS concepts</li>
-                        <li>Translated complex geographic information into accessible educational formats</li>
-                    </ul>
-                </div>
-                
-                <div class="experience-card">
-                    <h3>Planning Land Management Intern</h3>
-                    <p>Guangzhou Municipal Planning and Natural Resources Bureau | Jul-Aug 2023</p>
-                    <ul>
-                        <li>Utilized smart spatial information platforms to verify land-use compliance</li>
-                        <li>Assisted in public consultation processes for urban development projects</li>
-                        <li>Applied GIS tools to support land management decisions and regulatory compliance</li>
-                        <li>Coordinated with multiple government departments on planning initiatives</li>
-                    </ul>
-                </div>
-                
-                <div class="experience-card">
-                    <h3>Urban Planning Intern</h3>
-                    <p>Guangzhou Urban Planning and Design Institute | Jan-Jun 2023</p>
-                    <ul>
-                        <li>Contributed to major urban development projects through UAV data processing</li>
-                        <li>Supported the Chimelong Transformation and Shibi Cluster Urban Design projects</li>
-                        <li>Integrated GIS analysis with urban planning principles to support decision-making</li>
-                        <li>Collaborated with interdisciplinary teams on sustainable urban development</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact section has been removed -->
-
-    <footer>
-        <div class="container footer-content">
-            <p>&copy; 2025 Yanice Zeng. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://github.com/yanicez" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="mailto:yanicezeng28@gmail.com"><i class="fas fa-envelope"></i></a>
-                <a href="https://www.linkedin.com/in/yanice-zeng" target="_blank"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

@@ -7,6 +7,34 @@
     <link rel="stylesheet" href="../css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* 添加图片尺寸控制样式 */
+        .featured-image {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .project-tags .tag img {
+            width: 20px;
+            height: 20px;
+            margin-right: 5px;
+        }
+    </style>
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -34,19 +62,19 @@
             <h1>Tracking Coastal Ecosystem Shifts in Cable Bay, BC (2018–2024)</h1>
             <div class="project-tags">
                 <div class="tag">
-                    <img src="../images/software_icons/Geospatial Data Abstraction Library_icon.avif" alt="GDAL Icon">
+                    <img src="../images/software_icons/Geospatial_Data_Abstraction_Library_icon.avif" alt="GDAL Icon">
                     <span>Remote Sensing</span>
                 </div>
                 <div class="tag">
-                    <img src="images/software_icons/Python_icon.avif" alt="Python Icon">
+                    <img src="../images/software_icons/Python_icon.avif" alt="Python Icon">
                     <span>Image Processing</span>
                 </div>
                 <div class="tag">
-                    <img src="images/software_icons/arcgispro_icon.avif" alt="ArcGIS Pro Icon">
+                    <img src="../images/software_icons/arcgispro_icon.avif" alt="ArcGIS Pro Icon">
                     <span>ArcGIS Pro</span>
                 </div>
                 <div class="tag">
-                    <img src="images/software_icons/rstudio_icon.avif" alt="RStudio Icon">
+                    <img src="../images/software_icons/rstudio_icon.avif" alt="RStudio Icon">
                     <span>R</span>
                 </div>
             </div>
@@ -144,7 +172,7 @@ print(f"Model Accuracy: {accuracy * 100:.2f}%")
     <footer>
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <p>&copy; 2025 Yanice Zeng. All rights reserved.</p>
                 <div class="social-links">
                     <a href="https://github.com/yanicez" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:yanicezeng28@gmail.com"><i class="fas fa-envelope"></i></a>

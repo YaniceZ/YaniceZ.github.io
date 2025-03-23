@@ -7,6 +7,68 @@
     <link rel="stylesheet" href="../css/styles.css">
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 添加图片处理相关的CSS -->
+    <style>
+        .project-image-gallery {
+            margin-bottom: 2rem;
+        }
+        
+        .featured-image {
+            width: 100%;
+            max-height: 500px;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+        }
+        
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .image-grid img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .image-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-grid img {
+                height: 200px;
+            }
+            
+            .featured-image {
+                max-height: 300px;
+            }
+        }
+        
+        /* 图片加载动画 */
+        .img-loading {
+            position: relative;
+        }
+        
+        .img-loading::before {
+            content: "Loading...";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
     <!-- Header/Navigation -->
@@ -46,10 +108,27 @@
             
             <div class="project-content-wrapper">
                 <div class="project-image-gallery">
-                    <img src="images/project_image/layout_GEM511/lab2_Salmon_Stream_Network_analysis.jpg" alt="Salmon Stream Network Map" class="featured-image">
+                    <!-- 添加 onload 和 onerror 处理来解决图片加载问题 -->
+                    <div class="img-loading">
+                        <img src="../images/project_image/layout_GEM511/lab2_Salmon_Stream_Network_analysis.jpg" 
+                             alt="Salmon Stream Network Map" 
+                             class="featured-image" 
+                             onload="this.parentNode.classList.remove('img-loading')" 
+                             onerror="this.src='../images/placeholder.jpg'; this.parentNode.classList.remove('img-loading')">
+                    </div>
                     <div class="image-grid">
-                        <img src="images/project_image/layout_GEM511/lab2_Stream network across Vancouver Island.jpg" alt="Stream network across Vancouver Island">
-                        <img src="images/project_image/layout_GEM511/lab2_Stream networks analysis on small scale and large scale.jpg" alt="Analysis on small scale and large scale">
+                        <div class="img-loading">
+                            <img src="../images/project_image/layout_GEM511/lab2_Stream_network_across_Vancouver_Island.jpg" 
+                                 alt="Stream network across Vancouver Island" 
+                                 onload="this.parentNode.classList.remove('img-loading')" 
+                                 onerror="this.src='../images/placeholder.jpg'; this.parentNode.classList.remove('img-loading')">
+                        </div>
+                        <div class="img-loading">
+                            <img src="../images/project_image/layout_GEM511/lab2_Stream_networks_analysis_on_small_scale_and_large_scale.jpg" 
+                                 alt="Analysis on small scale and large scale" 
+                                 onload="this.parentNode.classList.remove('img-loading')" 
+                                 onerror="this.src='../images/placeholder.jpg'; this.parentNode.classList.remove('img-loading')">
+                        </div>
                     </div>
                 </div>
                 
@@ -152,7 +231,7 @@ arcpy.sa.StreamToFeature(streams, flow_dir, "stream_network.shp", "SIMPLIFY")
     <footer>
         <div class="container">
             <div class="footer-content">
-                <p>&copy; 2025 Your Name. All rights reserved.</p>
+                <p>&copy; 2025 Yanice Zeng. All rights reserved.</p>
                 <div class="social-links">
                     <a href="https://github.com/yanicez" target="_blank"><i class="fab fa-github"></i></a>
                     <a href="mailto:yanicezeng28@gmail.com"><i class="fas fa-envelope"></i></a>
@@ -167,5 +246,73 @@ arcpy.sa.StreamToFeature(streams, flow_dir, "stream_network.shp", "SIMPLIFY")
     <!-- Prism.js for code highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    
+    <!-- 添加图片加载处理脚本 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // 创建一个占位图片如果没有
+            function createPlaceholder() {
+                // 检查是否已存在占位图片
+                if (!document.querySelector('img[src="../images/placeholder.jpg"]')) {
+                    const placeholderImg = new Image();
+                    placeholderImg.src = "../images/placeholder.jpg";
+                    placeholderImg.style.display = "none";
+                    document.body.appendChild(placeholderImg);
+                }
+            }
+            
+            // 修复图片路径问题
+            function fixImagePaths() {
+                const images = document.querySelectorAll('.project-image-gallery img');
+                images.forEach(img => {
+                    // 替换空格为下划线
+                    if (img.src.includes(' ')) {
+                        let newSrc = img.src.replace(/ /g, '_');
+                        img.src = newSrc;
+                    }
+                    
+                    // 检查图片是否存在
+                    const testImg = new Image();
+                    testImg.onload = function() {
+                        img.parentNode.classList.remove('img-loading');
+                    };
+                    testImg.onerror = function() {
+                        // 尝试不同的路径格式
+                        const paths = [
+                            img.src,
+                            img.src.replace('images/project_image/', 'images/'),
+                            '../' + img.src.split('../').pop().replace('images/project_image/', 'images/'),
+                            img.src.replace('/layout_GEM511/', '/')
+                        ];
+                        
+                        let loaded = false;
+                        paths.forEach(path => {
+                            if (!loaded) {
+                                const altImg = new Image();
+                                altImg.onload = function() {
+                                    img.src = path;
+                                    img.parentNode.classList.remove('img-loading');
+                                    loaded = true;
+                                };
+                                altImg.src = path;
+                            }
+                        });
+                        
+                        // 如果所有路径都失败，使用占位图片
+                        setTimeout(() => {
+                            if (!loaded) {
+                                img.src = '../images/placeholder.jpg';
+                                img.parentNode.classList.remove('img-loading');
+                            }
+                        }, 2000);
+                    };
+                    testImg.src = img.src;
+                });
+            }
+            
+            createPlaceholder();
+            fixImagePaths();
+        });
+    </script>
 </body>
 </html>

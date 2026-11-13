@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Yanice Zeng</title>
+  <meta name="description" content="Yanice Zeng, GIS developer in Vancouver. Python pipelines and quality checks for geospatial data.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header class="intro">
+      <div class="intro-text">
+        <h1>Yanice Zeng</h1>
+        <p class="role">GIS developer, Vancouver</p>
+        <p>I work at Opta Information Intelligence, a Verisk company, where I write the Python that turns municipal open data into standard civic address and parcel layers for Canadian provinces and territories, and the checks that stop a bad update before anyone uses it.</p>
+        <p>Before that I studied geography at South China Normal University and geomatics at the University of British Columbia.</p>
+        <nav class="links" aria-label="Elsewhere">
+          <a href="https://www.linkedin.com/in/yanice-zeng">LinkedIn</a>
+          <a href="https://github.com/YaniceZ">GitHub</a>
+        </nav>
+      </div>
+      <img class="portrait" src="images/photo.jpg" alt="Portrait of Yanice Zeng" width="640" height="853">
+    </header>
+
+    <section aria-labelledby="work">
+      <h2 id="work">Work</h2>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3>GIS Developer, Opta Information Intelligence</h3>
+          <span class="when">2025 – present</span>
+        </div>
+        <ul>
+          <li>Maintain the Python and ArcPy pipelines behind civic address layers for 11 provinces and territories and parcel layers for 10.</li>
+          <li>Adapt field mappings as municipal schemas change, and source municipal open data where provincial coverage has gaps.</li>
+          <li>Write QA scripts that flag a source when its numbers fall outside per-source thresholds. Flags are reviewed by hand before anything is reprocessed.</li>
+          <li>Added a check that stops a run on empty output, after tracing an Alberta layer that came out empty with no error.</li>
+          <li>Traced how the team's two-way AWS S3 sync could overwrite colleagues' updates, and built a safer way to sync one geodatabase at a time.</li>
+        </ul>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Planning intern, Guangzhou</h3>
+          <span class="when">2023</span>
+        </div>
+        <p>Mapping and UAV data processing at the Guangzhou Urban Planning and Design Institute, then a summer checking parcels against regulatory plans at the city's planning and natural resources bureau.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="projects">
+      <h2 id="projects">Projects</h2>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/YaniceZ/civic-address-qa">civic-address-qa</a></h3>
+          <span class="when">Python</span>
+        </div>
+        <p>Downloads civic address points from public municipal ArcGIS services, maps each city's schema onto one standard, and runs quality checks before the output is used. On Thunder Bay's 45,102 addresses the parser agrees with the city's own split fields on 99.95% of rows. Most of the rest turned out to be records where the city's fields disagree with each other.</p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Land cover change at Cable Bay, BC</h3>
+          <span class="when">UBC, 2024–2025</span>
+        </div>
+        <p>Classified Sentinel-2 imagery for each year from 2018 to 2024 with a Random Forest model in Python (97.0–98.6% overall accuracy), then used transition matrices and Getis-Ord Gi* hotspots to see where forest and meadow were giving way to development.</p>
+        <figure>
+          <img src="images/cable-bay-change.jpg" alt="Seven land cover maps of Cable Bay, one per year from 2018 to 2024, classed as broadleaf, conifer, cropland, developed, meadow and water" width="1400" height="555" loading="lazy">
+          <figcaption>Annual land cover, 2018–2024.</figcaption>
+        </figure>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Salmon access on eastern Vancouver Island</h3>
+          <span class="when">UBC coursework</span>
+        </div>
+        <div class="split">
+          <p>Derived a stream network from a DEM in ArcGIS Pro for the Georgia Strait conservation unit and marked which reaches salmon can still reach from the ocean. With 89 dams in the area, 11,450 stream segments came out accessible and 7,174 cut off.</p>
+          <figure>
+            <img src="images/salmon-streams.jpg" alt="Map of eastern Vancouver Island streams coloured by whether salmon can reach them, with dams and ocean outlets marked" width="550" height="786" loading="lazy">
+          </figure>
+        </div>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/YaniceZ/trips">Trip planner</a></h3>
+          <span class="when">JavaScript</span>
+        </div>
+        <p>A static, installable page for each trip: day-by-day plans on a Leaflet map, booking countdowns, cost splitting and calendar export, all usable offline. A shared engine checks each trip's content before the page loads. <a href="https://yanicez.github.io/trips/">Live site</a>.</p>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
+          <h3><a href="https://github.com/YaniceZ/epic-pass-guide">Epic Pass guide</a></h3>
+          <span class="when">JavaScript</span>
+        </div>
+        <p>A bilingual reference for Epic Pass holders with a resort map. It installs as a web app and works without a connection. <a href="https://yanicez.github.io/epic-pass-guide/">Live site</a>.</p>
+      </article>
+    </section>
+
+    <section aria-labelledby="education">
+      <h2 id="education">Education</h2>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>Master of Geomatics for Environmental Management, University of British Columbia</h3>
+          <span class="when">2025</span>
+        </div>
+      </article>
+      <article class="entry">
+        <div class="entry-head">
+          <h3>B.Sc. Geography, South China Normal University</h3>
+          <span class="when">2024</span>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <p>The best way to reach me is through <a href="https://www.linkedin.com/in/yanice-zeng">LinkedIn</a>.</p>
+    </footer>
+  </main>
+</body>
+</html>

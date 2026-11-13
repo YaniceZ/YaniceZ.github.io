@@ -1,0 +1,176 @@
+:root {
+  --bg: #f7f6f2;
+  --ink: #1d2422;
+  --muted: #5d6562;
+  --rule: #dcd9d0;
+  --accent: #2f5d50;
+  --accent-hover: #1f4238;
+  --figure-bg: #ffffff;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #141816;
+    --ink: #e6e4de;
+    --muted: #a3aaa6;
+    --rule: #2c332f;
+    --accent: #8fc2b1;
+    --accent-hover: #b4dccd;
+    --figure-bg: #f4f3ef;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+main {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 72px 24px 56px;
+}
+
+h1, h2, h3 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
+}
+
+h1 { font-size: 2.6rem; letter-spacing: -0.01em; }
+
+h2 {
+  font-size: 0.8rem;
+  font-family: "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 28px;
+}
+
+h3 { font-size: 1.2rem; font-weight: 500; }
+
+p { margin: 0 0 1em; }
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover { color: var(--accent-hover); }
+
+h3 a { text-decoration: none; }
+h3 a:hover { text-decoration: underline; }
+
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 168px;
+  gap: 40px;
+  align-items: start;
+  margin-bottom: 72px;
+}
+
+.role {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 6px 0 24px;
+}
+
+.portrait {
+  width: 168px;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+.links {
+  display: flex;
+  gap: 24px;
+  margin-top: 8px;
+  font-weight: 500;
+}
+
+section { margin-bottom: 64px; }
+
+.entry { margin-bottom: 36px; }
+
+.entry-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.when {
+  color: var(--muted);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1.1em;
+}
+
+li { margin-bottom: 0.45em; }
+li::marker { color: var(--muted); }
+
+figure { margin: 18px 0 0; }
+
+figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: var(--figure-bg);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+}
+
+figcaption {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-top: 8px;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 1fr 220px;
+  gap: 28px;
+  align-items: start;
+}
+
+.split figure { margin: 0; }
+
+footer {
+  border-top: 1px solid var(--rule);
+  padding-top: 20px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  main { padding: 40px 16px 40px; }
+  h1 { font-size: 2.1rem; }
+  .intro { grid-template-columns: 1fr; gap: 24px; margin-bottom: 48px; }
+  .portrait { width: 128px; order: -1; }
+  .entry-head { flex-direction: column; gap: 2px; }
+  .split { grid-template-columns: 1fr; }
+  .split figure { max-width: 320px; }
+}

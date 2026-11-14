@@ -65,6 +65,18 @@
 
       <article class="entry">
         <div class="entry-head">
+          <h3><a href="https://github.com/YaniceZ/autoates-bc">autoates-bc</a></h3>
+          <span class="when">Python</span>
+        </div>
+        <p>AutoATES rates avalanche terrain from an elevation model and a forest layer, and gives each cell one class with no sense of how far to trust it. I reran the whole chain a few hundred times with perturbed inputs to get a probability for each class, for a block of the BC Coast Mountains, then checked those probabilities against a lidar-based run and two expert benchmark maps. Runs that agree with each other turn out to agree with the experts more often: 83% and 92% of the time where over nine runs in ten agree, against 59% and 63% where only half to seven in ten do. A research exercise, not something to plan a route with.</p>
+        <figure>
+          <img src="images/autoates-bc.jpg" alt="Three maps of the same mountain block: the single AutoATES class map, the most likely class faded where runs disagree, and the probability that the class is higher than the single map says" width="1400" height="602" loading="lazy">
+          <figcaption>One AutoATES run, the ensemble's most likely class faded by agreement, and the chance the class is higher.</figcaption>
+        </figure>
+      </article>
+
+      <article class="entry">
+        <div class="entry-head">
           <h3>Land cover change at Cable Bay, BC</h3>
           <span class="when">UBC, 2024–2025</span>
         </div>
